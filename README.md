@@ -11,3 +11,4 @@ data.js - data input from the csv file that is use as an input for the leaflet m
 map.js - javascript code that is used to create the leaflet man visualization
 index.html - website to show the leaflet visualization
 style.css - adds some customization to the html website
+
