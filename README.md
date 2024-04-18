@@ -11,6 +11,7 @@ Files in this repo:
 6) map.js - javascript code that is used to create the leaflet man visualization
 7) index.html - website to show the leaflet visualization
 8) style.css - adds some customization to the html website
+9) app.py - Flask routes for seaborn visualizations
 
 The dataset was from Kaggle, it came with a csv file and a sqlite database.
 https://www.kaggle.com/datasets/mdinmore/covid-cases-mortality-with-features-by-country
