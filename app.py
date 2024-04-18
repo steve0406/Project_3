@@ -22,6 +22,8 @@ def welcome():
         f"Available Routes: <br/>"
         f"/api/covid/pair_plot<br/>"
         f"/api/covid/pair_plot_with_hue<br/>"
+        f"/api/covid/bar_plot<br/>"
+        f"/api/covid/top_10_cases_bar_plot<br/>"
         
     )
 
@@ -58,6 +60,56 @@ def pair_plot_with_hue():
 
     # Serve the image file
     return send_file(plot_path, mimetype='image/png')
+
+@app.route("/api/covid/bar_plot")
+def bar_plot():
+    # Sort the DataFrame by 'Deaths' column in descending order and select the top 10 rows
+    top_10_countries = new_df.sort_values(by='Deaths', ascending=False).head(10)
+
+    # Generate bar plot
+    sns.set(style="whitegrid")
+    plt.figure(figsize=(10, 6))
+    sns.barplot(data=top_10_countries, x="Country", y="Deaths")
+    plt.title('Top 10 Countries by Deaths')
+    plt.xlabel('Country')
+    plt.ylabel('Deaths')
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+
+    # Save the bar plot as an image
+    plot_filename = 'bar_plot_top_10.png'
+    plot_path = os.path.join(plot_dir, plot_filename)
+    plt.savefig(plot_path)
+    plt.close()
+
+    # Serve the image file
+    return send_file(plot_path, mimetype='image/png')
+
+@app.route("/api/covid/top_10_cases_bar_plot")
+def top_10_cases_bar_plot():
+    # Sort the DataFrame by 'Cases' column in descending order and select the top 10 rows
+    top_10_countries_cases = new_df.sort_values(by='Cases', ascending=False).head(10)
+
+    # Generate bar plot
+    sns.set(style="whitegrid")
+    plt.figure(figsize=(10, 6))
+    sns.barplot(data=top_10_countries_cases, x="Country", y="Cases")
+    plt.title('Top 10 Countries by Cases')
+    plt.xlabel('Country')
+    plt.ylabel('Cases')
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+
+    # Save the bar plot as an image
+    plot_filename = 'top_10_cases_bar_plot.png'
+    plot_path = os.path.join(plot_dir, plot_filename)
+    plt.savefig(plot_path)
+    plt.close()
+
+    # Serve the image file
+    return send_file(plot_path, mimetype='image/png')
+
+# Define directory for saving plots
+plot_dir = os.path.join(app.static_folder, "plots")
+os.makedirs(plot_dir, exist_ok=True)
 
 
 if __name__ == "__main__":
