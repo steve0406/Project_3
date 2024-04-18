@@ -12,3 +12,5 @@ Files in this repo:
 7) index.html - website to show the leaflet visualization
 8) style.css - adds some customization to the html website
 
+The dataset was from Kaggle, it came with a csv file and a sqlite database.
+https://www.kaggle.com/datasets/mdinmore/covid-cases-mortality-with-features-by-country
